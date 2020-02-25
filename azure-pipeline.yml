@@ -1,0 +1,67 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+variables:
+  - group: alfa
+  - name: MAVEN_CACHE_FOLDER
+    value: $(Pipeline.Workspace)/.m2/repository
+  - name: MAVEN_OPTS
+    value: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+
+stages:
+  - stage: Initialisation
+    jobs:
+      - job: InstallRequiredTools
+        displayName: Install Required Tools
+        steps:
+          - task: DockerInstaller@0
+            displayName: 'Install Docker 17.09.0-ce'
+
+      - job: BuildAndPersistArtefacts
+        displayName: Build and Persist Artefacts (Maven, Docker)
+        steps:
+          - checkout: self
+            persistCredentials: true
+
+  - stage: Build
+    jobs:
+      - job: BuildAndPersistArtefacts
+        displayName: Build and push docker image
+        steps:
+          - checkout: self
+            persistCredentials: true
+
+          - task: Maven@3
+            displayName: 'Maven install'
+            inputs:
+              mavenPomFile: pom.xml
+              goals: install
+              options: '-s $(System.DefaultWorkingDirectory)/pipeline/settings.xml'
+
+          - task: Maven@3
+            displayName: 'Maven build and push the docker Image'
+            inputs:
+             mavenPomFile: service/pom.xml
+             goals: compile jib:build -Dimage=naveen164/optimize-weight-value-services-service
+             options: '-s $(System.DefaultWorkingDirectory)/pipeline/settings.xml'
+
+  - stage: Deploy
+    jobs:
+      - job: DockerImageDeployVM
+        displayName: Docker image deploy to VM
+        steps:
+          - task: SSH@0
+            displayName: 'Run shell commands on remote machine'
+            inputs:
+              sshEndpoint: 'VM-1'
+              commands: |
+                docker stop owvs
+                docker rm owvs
+                docker pull naveen164/optimize-weight-value-services-service:latest
+                docker run --publish=80:8080 -d --name owvs naveen164/optimize-weight-value-services-service:latest
+
+

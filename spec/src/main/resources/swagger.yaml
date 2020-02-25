@@ -1,0 +1,152 @@
+swagger: '2.0'
+info:
+  title: Optimize Weight and Value API
+  description: API for optimaize weight to get maximum value
+  version: v1
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+tags:
+  - name: "Optimize Weight and Value API"
+    description: Opitimize weight to get maximum value for a given weight
+paths:
+  /:
+    post:
+      summary: Get maximum value and weight list for given weight and values
+      description: Get maximum value and list of weights fot input of max allowed weight along with the given weight and values list
+      operationId: getOptimumWeightAndValue
+      produces:
+        - application/json
+      tags:
+        - "Optimize weight and Value"
+      parameters:
+        - in: query
+          name: allowedWeight
+          type: integer
+          description: Max allowed weight
+          required: true
+        - in: body
+          name: Item
+          description: The customer allocation request
+          schema:
+            $ref: '#/definitions/WeightAndValue'
+          required: true
+      deprecated: false
+      responses:
+        200:
+          description: returns successfully created Object
+          schema:
+            $ref: '#/definitions/WeightAndValueResponse'
+        400:
+          description: Bad Request.
+          schema:
+            $ref: '#/definitions/BadRequest'
+        500:
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      reference:
+        type: string
+      message:
+        type: string
+  BadRequest:
+    type: object
+    properties:
+      invalid:
+        type: array
+        description: The list of invalid fields in the request.
+        items:
+          type: string
+  ApiError:
+    type: object
+    required:
+      - method
+      - requestUri
+      - status
+      - timestamp
+      - message
+      - debugMessage
+    properties:
+      method:
+        type: string
+        description: The request method type e.g. GET, POST.
+      requestUri:
+        type: string
+        description: The request URI.
+      status:
+        type: string
+        description: The textual representation of the response status.
+      timestamp:
+        type: string
+        description: The date and time (dd-MM-yyyy hh:mm:ss) the error occured.
+      message:
+        type: string
+        description:  High level error message.
+      debugMessage:
+        type: string
+        description: Detailed error message.
+      subErrors:
+        type: array
+        items:
+          $ref: '#/definitions/ApiValidationError'
+        description: The list of invalid fields in the request.
+  ApiValidationError:
+    type: object
+    required:
+      - field
+      - rejectedValue
+      - message
+    properties:
+      field:
+        type: string
+        description: The field that has failed validation.
+      rejectedValue:
+        type: string
+        description: The value that has failed validation.
+      message:
+        type: string
+        description: The reason and advice for failed validation.
+  WeightAndValueResponse:
+    type: object
+    properties:
+      items_to_pack:
+        type: array
+        description: List of ideal weights
+        items:
+          type: integer
+      value:
+        type: array
+        description: List of value
+        items:
+          type: integer
+      totalWeight:
+        type: string
+      totalValue:
+        type: integer
+  WeightAndValue:
+    type: object
+    properties:
+      items:
+        type: array
+        description: The list of Contracted Commitments.
+        items:
+          $ref: '#/definitions/Item'
+      allowedWeight:
+        type: integer
+  Item:
+    properties:
+      name:
+        type: string
+      weight:
+        type: integer
+      value:
+        type: integer
