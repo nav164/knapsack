@@ -1,4 +1,4 @@
-package com.assingment.service;
+package com.assignment.service;
 
 import io.swagger.model.WeightAndValue;
 import io.swagger.model.WeightAndValueResponse;

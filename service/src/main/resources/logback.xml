@@ -24,7 +24,7 @@
         </triggeringPolicy>
     </appender>
      
-    <logger name="com.assingment" level="DEBUG">
+    <logger name="com.assignment" level="DEBUG">
         <appender-ref ref="applicationLog" />
         <appender-ref ref="console" />
     </logger>

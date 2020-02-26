@@ -1,4 +1,4 @@
-package com.assingment.configuration;
+package com.assignment.configuration;
 
 import java.util.Collections;
 
@@ -30,7 +30,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo() {
 	    return new ApiInfo(
 	      "Optimize Weight and Value REST API", 
-	      "This API will perform excute algorithm to pick optimum weights for max value.", 
+	      "This API will execute the algorithm to pick up optimum weights for max value.",
 	      "API TOS", 
 	      "Terms of service", 
 	      new Contact("Naveen Patel", "gmail.com", "naveen.deism@gmail.com"), 

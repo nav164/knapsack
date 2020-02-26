@@ -1,7 +1,7 @@
-package com.assingment.controller;
+package com.assignment.controller;
 
-import com.assingment.TestData;
-import com.assingment.service.OptimizeWeightAndValueService;
+import com.assignment.testData.TestData;
+import com.assignment.service.OptimizeWeightAndValueService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.model.WeightAndValue;
 import io.swagger.model.WeightAndValueResponse;

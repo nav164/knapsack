@@ -1,6 +1,6 @@
-package com.assingment.service;
+package com.assignment.service;
 
-import com.assingment.TestData;
+import com.assignment.testData.TestData;
 import io.swagger.model.Item;
 import io.swagger.model.WeightAndValue;
 import io.swagger.model.WeightAndValueResponse;
@@ -17,7 +17,7 @@ public class OptimizeWeightAndValueServiceImplTest {
     private OptimizeWeightAndValueService optimizeWeightAndValueService = new OptimizeWeightAndValueServiceImpl();
 
     @Test
-    public void getMaxValueAndWeightListTest() throws Exception{
+    public void getMaxValueAndWeightListTest() {
         WeightAndValueResponse weightAndValueResponse = optimizeWeightAndValueService.getMaxValueAndWeightList(TestData.getWeightValueRequestData());
         assertNotNull("Optimum weight and value response list is not null", weightAndValueResponse);
         assertEquals("Item to pack list size", 7, weightAndValueResponse.getItemsToPack().size());
@@ -25,10 +25,10 @@ public class OptimizeWeightAndValueServiceImplTest {
         assertEquals("Total value", 120,  weightAndValueResponse.getTotalValue().intValue());
         assertEquals("Total weight", "39 kg",  weightAndValueResponse.getTotalWeight());
     }
-    
+
     @Test
-    public void getMaxValueAndWeightListTest2() throws Exception{
-    	WeightAndValue weightAndValue = new WeightAndValue();
+    public void getMaxValueAndWeightListTest2() {
+        WeightAndValue weightAndValue = new WeightAndValue();
         List<Item> itemList = new ArrayList<>();
         Item item = new Item();
         item.setName("Elt1");
@@ -41,7 +41,7 @@ public class OptimizeWeightAndValueServiceImplTest {
         item.setValue(100);
         item.setWeight(20);
         itemList.add(item);
-        
+
         item = new Item();
         item.setName("Elt3");
         item.setValue(120);
@@ -49,7 +49,7 @@ public class OptimizeWeightAndValueServiceImplTest {
         itemList.add(item);
         weightAndValue.setItems(itemList);
         weightAndValue.setAllowedWeight(50);
-        
+
         WeightAndValueResponse weightAndValueResponse = optimizeWeightAndValueService.getMaxValueAndWeightList(weightAndValue);
         assertNotNull("Optimum weight and value response list is not null", weightAndValueResponse);
         assertEquals("Item to pack list size", 2, weightAndValueResponse.getItemsToPack().size());

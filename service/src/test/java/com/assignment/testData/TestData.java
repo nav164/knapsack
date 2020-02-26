@@ -1,4 +1,4 @@
-package com.assingment;
+package com.assignment.testData;
 
 import io.swagger.model.Item;
 import io.swagger.model.WeightAndValue;

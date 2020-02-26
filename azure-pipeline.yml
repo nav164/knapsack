@@ -46,7 +46,7 @@ stages:
             displayName: 'Maven build and push the docker Image'
             inputs:
              mavenPomFile: service/pom.xml
-             goals: compile jib:build -Dimage=naveen164/optimize-weight-value-services-service
+             goals: compile jib:build -Dimage=$(docker.image.name)
              options: '-s $(System.DefaultWorkingDirectory)/pipeline/settings.xml'
 
   - stage: Deploy
@@ -61,7 +61,7 @@ stages:
               commands: |
                 docker stop owvs
                 docker rm owvs
-                docker pull naveen164/optimize-weight-value-services-service:latest
-                docker run --publish=80:8080 -d --name owvs naveen164/optimize-weight-value-services-service:latest
+                docker pull $(docker.image.name):latest
+                docker run --publish=80:8080 -d --name owvs $(docker.image.name):latest
 
 

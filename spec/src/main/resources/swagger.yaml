@@ -22,14 +22,9 @@ paths:
       tags:
         - "Optimize weight and Value"
       parameters:
-        - in: query
-          name: allowedWeight
-          type: integer
-          description: Max allowed weight
-          required: true
         - in: body
           name: Item
-          description: The customer allocation request
+          description: Request object carrying list of weight, values and allowed capacity
           schema:
             $ref: '#/definitions/WeightAndValue'
           required: true
@@ -123,30 +118,42 @@ definitions:
         description: List of ideal weights
         items:
           type: integer
+        example: [6, 8, 2, 8, 2, 3, 10]
       value:
         type: array
         description: List of value
         items:
           type: integer
+        example: [24, 20, 6, 24, 10, 6, 30]
       totalWeight:
         type: string
+        example: 39 kg
       totalValue:
         type: integer
+        example: 120
   WeightAndValue:
     type: object
     properties:
       items:
         type: array
-        description: The list of Contracted Commitments.
+        description: The list of items.
         items:
           $ref: '#/definitions/Item'
       allowedWeight:
         type: integer
+        description: Maximum capacity allowed
+        example: 40
   Item:
     properties:
       name:
         type: string
+        description: Name of item
+        example: Item1
       weight:
         type: integer
+        description: Weight of item
+        example: 5
       value:
         type: integer
+        description: Value of item
+        example: 10

@@ -24,7 +24,7 @@
   
     <Loggers>
       
-        <Logger name="com.assingment" additivity="false" level="debug">
+        <Logger name="com.assignment" additivity="false" level="debug">
             <AppenderRef ref="applicationLog" />
             <AppenderRef ref="console"  />
         </Logger>

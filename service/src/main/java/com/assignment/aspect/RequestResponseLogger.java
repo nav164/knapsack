@@ -1,4 +1,4 @@
-package com.assingment.aspect;
+package com.assignment.aspect;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
