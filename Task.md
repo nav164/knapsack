@@ -59,7 +59,4 @@ password: qL?dP2=qT9qbP[-PULmykcNX6ZjTQqg4
 tenant_id: 7634b95b-1c8a-4180-b7e9-c103ee2e082e
 Reource Group : naveen_deployment_rg
 ```
-You will get access to a resource group in Azure once you are ready to do the deployment. 
-
-Good Luck.
 
