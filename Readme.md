@@ -15,8 +15,18 @@ http://40.127.181.34/swagger-ui.html
 4. Scroll down to see the output response and other details
 
 ## How to start the service locally
-1. Open the command prompt
+1. Clone the repo in the system
+
+```bash
+https://github.com/nav164/knapsack.git
+```
+
 2. Go to root level of project
+
+```bash
+cd knapsack
+```
+
 3. Execute maven command to download dependancies and build the project
 
 ```bash
