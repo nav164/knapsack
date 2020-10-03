@@ -51,8 +51,18 @@ to get the detials of the request and response body. You can test it out by prov
 
 ## How to start service with docker container
 
-1. Open the command prompt
+1. Clone the repo in the system
+
+```bash
+https://github.com/nav164/knapsack.git
+```
+
 2. Go to root level of project
+
+```bash
+cd knapsack
+```
+
 3. Go to service folder by executing below command in command prompt
 
 ```bash
