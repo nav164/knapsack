@@ -34,7 +34,7 @@
         <swagger-request-validator.version>1.2.1</swagger-request-validator.version>
         <feign.version>8.18.0</feign.version>
         <swagger-core.version>1.5.16</swagger-core.version>
-        <swagger.codegen.version>2.3.1</swagger.codegen.version>
+        <swagger.codegen.version>2.4.19</swagger.codegen.version>
         <oltu.version>1.0.1</oltu.version>
         <cucumber.version>1.2.5</cucumber.version>
     </properties>
